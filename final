@@ -1,0 +1,34 @@
+
+
+//Insert data to wordpress cutom table
+
+<?php
+
+    if (isset($_POST['submit'])) {
+        global $wpdb;
+        $table = tbl_contact;
+        $data = array(
+            'name' => $_POST['name'],
+            'email'    => $_POST['email'],
+            'message'    => $_POST['message']
+        );
+        $format = array(
+            '%s',
+            '%s',
+            '%s'
+        );
+        $success=$wpdb->insert( $table, $data, $format );
+        if($success){
+            echo 'data has been save' ; 
+        }
+    } else {
+        ?>
+        echo "<h2>There is a problem</h2>";
+        <?php 
+    }  
+?>
+
+
+
+// After cutting some section form index.php we should include the below code
+<?php include( get_template_directory() . '/contact.php'); ?>
